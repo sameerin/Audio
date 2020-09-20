@@ -1,0 +1,147 @@
+=======================Git cheat sheet made by Sameer==========================================
+==============================================================================================
+
+=========================================Question and answer with self====================================================================================
+Question 1: How to give a patchset on some earlier given commit. Basically you have to "move to that Ptach SHA1(checkout, you can amke a branch) and then amend that commit.
+You can rebase after checking out, you can alsofirst be on ceratin remote branch and then fetch the gerit
+Ans: ----------------Checking out a gerit will create a detached head with the changes-----------------------
+											git fetch https://sahmadsi@git-amr-10.devtools.intel.com/gerrit/a/wcd_fw-dev refs/changes/33/76033/5 && git checkout FETCH_HEAD
+											From https://git-amr-10.devtools.intel.com/gerrit/a/wcd_fw-dev
+											 * branch                  refs/changes/33/76033/5 -> FETCH_HEAD
+											Note: switching to 'FETCH_HEAD'.
+
+											You are in 'detached HEAD' state. You can look around, make experimental
+											changes and commit them, and you can discard any commits you make in this
+											state without impacting any branches by switching back to a branch.
+
+											If you want to create a new branch to retain commits you create, you may
+											do so (now or later) by using -c with the switch command. Example:
+
+											  git switch -c <new-branch-name>
+
+											Or undo this operation with:
+
+											  git switch -
+
+
+
+Question 2: How to delete a commited file in Gerit
+					Ans: Just delete that file. You will get delted in the working area. Then add this delted file to staging area and commit amend
+
+Question 3: How to get full commit hash from short commit hash and vice versa
+											Ans:
+											Git rev-parse short commit hash
+											Git rev-parse --short commit hash
+
+Question 4: How to see which branches contain the commit hash
+                                     Ans: git branch -a --contains <commit-hash> (remove -a for local branches)
+									 
+Question 5: How to see changes in git between/on a commit hash and  a particular file within that hash
+
+											ans:
+											git show <beginning_sha> <ending_sha>
+
+											Git show commit-hash -- <file path> (to show changes specific to that file)
+
+											git log -p 2ad70775 (to see changes in a git)
+											
+Question 6: git blame -l gulpfile.babel.js (to show full commit hash)
+
+Question 7: How to continue blaming in git
+
+										Ans: git blame -L 10,+1 fe25b6d^ -- <file/file   (continue blaming in git commit^ is the parent)
+
+Question 8: How to see childs of commits
+
+										Ans:
+										git rev-list --ancestry-path commit1..commit2 to see childs between Commit 1 and commit2
+
+										git rev-list --ancestry-path b53ff86241..HEAD |tail -1 just to see child of commit1		
+
+Question: How to see full path of files in git show/diff
+										Ans: git show --stat=$COLUMNS										
+===================================================================================================================================================================
+
+git add . for all
+
+=========================================Removing files====================================================================
+git checkout./file names, to remove files from staging ares
+
+git checkout -- . to remove files from working tree
+
+
+=======================================================Stashing==============================================================
+git stash to remove the changes and save them for later
+
+git stash list/pop/apply
+
+git stash pop stash@{n}, n denotes which stash in list to  be popped
+
+git stash -- <full file name including path (as shwon in the working directory)>
+
+However, if you do want to specify a message, use push.
+
+git stash push -m "describe changes to filename.ext" filename1.ext fileaname2.txt
+
+ex: git stash push -m "statshing header file include changes to check why build is failing" .
+
+to pop only certain files from a stash
+git checkout stash@{N} <File(s)/Folder(s) path>
+
+to show diif changes of files in stash, remove -p, just to see files
+git stash show -p stash@{2}
+
+=====================================================Removing files and Others========================================================
+
+git reset --hard , t0 reomve files
+
+git status
+
+git log
+
+git log --oneline
+
+Git branch -a (list remote branches as well), 
+
+then
+
+git branch <name>
+
+git checkout <branch name>
+
+git commit -s -m "test commit"(for signed commit)
+
+git commit, to enter a proper message
+
+git show --stat --oneline HEAD
+
+git rev-parse --short HEAD
+
+git push origin HEAD:refs/for/master
+
+git config --global commit.template j:/WiFi/wcd_fw-dev/templates/regular.txt
+
+git config --global core.editor "vim"
+
+git reset --mode HEAD ~x
+
+git branch -d branch name
+
+git revert (this one undoes the changes from a commit, any commit, and makes anew commit,
+this is required when reverting something pushed to repo
+)
+git revert commit ID
+
+git pull --rebase <origin> <branch-name> (rebase can be made default also
+
+git rebase -i (to intercatively rebase local commits)
+
+
+git commit --amend to amend a patch for latest gerit
+
+===================checkout particular commit hash======================
+Git clone repository
+Cd repo
+Git checkout commit hash (see that link). To push changes need to create a local branch for remote branch or the commit
+
+ 
