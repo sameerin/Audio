@@ -139,9 +139,89 @@ git rebase -i (to intercatively rebase local commits)
 
 git commit --amend to amend a patch for latest gerit
 
+git grep <string>
 ===================checkout particular commit hash======================
 Git clone repository
 Cd repo
 Git checkout commit hash (see that link). To push changes need to create a local branch for remote branch or the commit
+
+==========================================from the git tutorial in WiFi link=======================
+
+Steps
+cd ..
+# make a new clone
+git clone <repo> <repo>_bigger_task
+cd <repo>_bigger_task
+# make sure all 4 commits are in the new clone (this is were you will continue working)
+git log --pretty=oneline --abbrev-commit –decorate
+cd ../<repo>
+# get the SHA1 of commit2
+git log --pretty=oneline --abbrev-commit –decorate
+git reset --hard < SHA1 of commit B> # therefore discarding commits C and D, in this clone commits C and D are completely lost, this is why you need the above clone.
+turnin ..
+One can also use git local branch for this purpose instead of creating a new clone.
+
+git co -b <branch_name> => to save all 4 commits
+
+git co master => go back to master branc
+
+git reset --hard <SHA1 of commit till which you need to turnin>
+
+git rebase -i can be used to remove intermediate commits
+
+turnin ..
+
+git merge <branch_name> to get back the non tunrned two commits
+
+==================================================git clone  a remote branch===================================
+
+First, clone a remote git repository and cd into it:
+
+$ git clone git://example.com/myproject
+$ cd myproject
+
+Next, look at the local branches in your repository:
+
+$ git branch
+* master
+
+But there are other branches hiding in your repository! You can see these using the -a flag:
+
+$ git branch -a
+* master
+  origin/HEAD
+  origin/master
+  origin/v1.0-stable
+  origin/experimental
+
+If you just want to take a quick peek at an upstream branch, you can check it out directly:
+
+$ git checkout origin/experimental
+
+But if you want to work on that branch, you'll need to create a local tracking branch:
+
+$ git checkout -b experimental origin/experimental
+
+Now, if you look at your local branches, this is what you'll see:
+
+$ git branch
+  master
+* experimental
+
+You can actually track more than one remote repository using git remote.
+
+$ git remote add win32 git://example.com/users/joe/myproject-win32-port
+$ git branch -a
+* master
+  origin/HEAD
+  origin/master
+  origin/v1.0-stable
+  origin/experimental
+  win32/master
+  win32/new-widgets
+
+At this point, things are getting pretty crazy, so run gitk to see what's going on:
+
+$ gitk --all &
 
  
